@@ -26,7 +26,7 @@
     transparent 50%
   );
   background-size: 6px 6px;
-  background-color: #fdf7e4;
+  background: #ddd8c4 !important;
   color: #2f2f2f;
 
   .title {
@@ -61,8 +61,9 @@
       transparent 50%
     );
     background-size: 6px 6px;
-    background-color: #fdf7e4;
+    background: #ddd8c4 !important;
     padding-top: 70px;
+    padding-bottom: 20px;
 
     @media #{$mobile} {
       padding-right: 2rem;
@@ -73,8 +74,20 @@
       padding-left: 2rem;
     }
 
+    #card{
+      width: 100%;
+      display: flex;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+
     h1 {
-      font-size: 30px;
+      font-size: 35px;
+      font-weight: 900;
+    }
+    h2{
+      font-size: 25px;
+      padding-right: 20px;
     }
   }
   .stair {

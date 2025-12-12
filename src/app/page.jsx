@@ -2,7 +2,7 @@
 import styles from "./page.module.scss";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import Btn from "./components/Btn";
 import ServicesCard from "./components/ServicesCard";
 import "./base/card.css";
@@ -18,7 +18,16 @@ export default function Home() {
     AOS.init({ duration: 900 });
   }, []);
 
-  const data = useContext(WorkContext);
+  const workSamplesData = useContext(WorkContext);
+  const [randomSamples, setRandomSamples] = useState([]);
+
+  useEffect(() => {
+    if (workSamplesData.length > 0 && randomSamples.length === 0) {
+      const shuffled = [...workSamplesData].sort(() => 0.5 - Math.random());
+      setRandomSamples(shuffled.slice(0, 3));
+    }
+  }, [workSamplesData]);
+
   return (
     <main className={styles.container}>
       <section className={styles.hero}>
@@ -37,7 +46,9 @@ export default function Home() {
           textShadow={"1px 1px 3px #000"}
           border={"1px solid #fff"}
         />
-        <Link href={"/contact-us"} className={styles.heroMobileBtn}>تماس با ما</Link>
+        <Link href={"/contact-us"} className={styles.heroMobileBtn}>
+          تماس با ما
+        </Link>
         <canvas id="stars" width="300" height="300"></canvas>
       </section>
       <section className={styles.services} id="services">
@@ -46,136 +57,51 @@ export default function Home() {
       </section>
       <section className={styles.workSamples}>
         <h1 className={styles.title}>نمونه کار های کابینت سازی مهرشاد</h1>
-        <div class="cardContainer">
-          {data[0][0].cabinetMDF.slice(0, 1).map((d) => {
-            return (
-              <div class="container" style={{ height: "350px" }} key={d.id}>
-                <div class="canvas">
-                  <div class="tracker tr-1"></div>
-                  <div class="tracker tr-2"></div>
-                  <div class="tracker tr-3"></div>
-                  <div class="tracker tr-4"></div>
-                  <div class="tracker tr-5"></div>
-                  <div class="tracker tr-6"></div>
-                  <div class="tracker tr-7"></div>
-                  <div class="tracker tr-8"></div>
-                  <div class="tracker tr-9"></div>
-                  <div class="tracker tr-10"></div>
-                  <div class="tracker tr-11"></div>
-                  <div class="tracker tr-12"></div>
-                  <div class="tracker tr-13"></div>
-                  <div class="tracker tr-14"></div>
-                  <div class="tracker tr-15"></div>
-                  <div class="tracker tr-16"></div>
-                  <div class="tracker tr-17"></div>
-                  <div class="tracker tr-18"></div>
-                  <div class="tracker tr-19"></div>
-                  <div class="tracker tr-20"></div>
-                  <div class="tracker tr-21"></div>
-                  <div class="tracker tr-22"></div>
-                  <div class="tracker tr-23"></div>
-                  <div class="tracker tr-24"></div>
-                  <div class="tracker tr-25"></div>
-                  <div id="card">
-                    <Image
-                      src={d.imageSrc}
-                      width={1000}
-                      height={230}
-                      class="img"
-                      alt={d.title}
-                    />
-                    <h1>{d.title}</h1>
-                  </div>
+
+        <div className="cardContainer">
+          {randomSamples.map((item) => (
+            <div class="container" style={{ height: "350px" }} key={item.id}>
+              <div class="canvas">
+                <div class="tracker tr-1"></div>
+                <div class="tracker tr-2"></div>
+                <div class="tracker tr-3"></div>
+                <div class="tracker tr-4"></div>
+                <div class="tracker tr-5"></div>
+                <div class="tracker tr-6"></div>
+                <div class="tracker tr-7"></div>
+                <div class="tracker tr-8"></div>
+                <div class="tracker tr-9"></div>
+                <div class="tracker tr-10"></div>
+                <div class="tracker tr-11"></div>
+                <div class="tracker tr-12"></div>
+                <div class="tracker tr-13"></div>
+                <div class="tracker tr-14"></div>
+                <div class="tracker tr-15"></div>
+                <div class="tracker tr-16"></div>
+                <div class="tracker tr-17"></div>
+                <div class="tracker tr-18"></div>
+                <div class="tracker tr-19"></div>
+                <div class="tracker tr-20"></div>
+                <div class="tracker tr-21"></div>
+                <div class="tracker tr-22"></div>
+                <div class="tracker tr-23"></div>
+                <div class="tracker tr-24"></div>
+                <div class="tracker tr-25"></div>
+
+                <div id="card">
+                  <img
+                    src={`http://localhost:1337${item.image?.url}`}
+                    width={100}
+                    height={230}
+                    class="img"
+                    style={{ objectFit: "cover" }}
+                    alt={item.title}
+                  />
+                  <h2 style={{paddingRight: "20px"}}>{item.title}</h2>
                 </div>
               </div>
-            );
-          })}
-          {data[0][2].cabinetMemberan.slice(0, 1).map((d) => {
-            return (
-              <div class="container" style={{ height: "350px" }} key={d.id}>
-                <div class="canvas">
-                  <div class="tracker tr-1"></div>
-                  <div class="tracker tr-2"></div>
-                  <div class="tracker tr-3"></div>
-                  <div class="tracker tr-4"></div>
-                  <div class="tracker tr-5"></div>
-                  <div class="tracker tr-6"></div>
-                  <div class="tracker tr-7"></div>
-                  <div class="tracker tr-8"></div>
-                  <div class="tracker tr-9"></div>
-                  <div class="tracker tr-10"></div>
-                  <div class="tracker tr-11"></div>
-                  <div class="tracker tr-12"></div>
-                  <div class="tracker tr-13"></div>
-                  <div class="tracker tr-14"></div>
-                  <div class="tracker tr-15"></div>
-                  <div class="tracker tr-16"></div>
-                  <div class="tracker tr-17"></div>
-                  <div class="tracker tr-18"></div>
-                  <div class="tracker tr-19"></div>
-                  <div class="tracker tr-20"></div>
-                  <div class="tracker tr-21"></div>
-                  <div class="tracker tr-22"></div>
-                  <div class="tracker tr-23"></div>
-                  <div class="tracker tr-24"></div>
-                  <div class="tracker tr-25"></div>
-                  <div id="card">
-                    <Image
-                      src={d.imageSrc}
-                      width={1000}
-                      height={230}
-                      class="img"
-                      alt={d.title}
-                    />
-                    <h1>{d.title}</h1>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-          {data[0][3].door.slice(0, 1).map((d) => {
-            return (
-              <div class="container" style={{ height: "350px" }} key={d.id}>
-                <div class="canvas">
-                  <div class="tracker tr-1"></div>
-                  <div class="tracker tr-2"></div>
-                  <div class="tracker tr-3"></div>
-                  <div class="tracker tr-4"></div>
-                  <div class="tracker tr-5"></div>
-                  <div class="tracker tr-6"></div>
-                  <div class="tracker tr-7"></div>
-                  <div class="tracker tr-8"></div>
-                  <div class="tracker tr-9"></div>
-                  <div class="tracker tr-10"></div>
-                  <div class="tracker tr-11"></div>
-                  <div class="tracker tr-12"></div>
-                  <div class="tracker tr-13"></div>
-                  <div class="tracker tr-14"></div>
-                  <div class="tracker tr-15"></div>
-                  <div class="tracker tr-16"></div>
-                  <div class="tracker tr-17"></div>
-                  <div class="tracker tr-18"></div>
-                  <div class="tracker tr-19"></div>
-                  <div class="tracker tr-20"></div>
-                  <div class="tracker tr-21"></div>
-                  <div class="tracker tr-22"></div>
-                  <div class="tracker tr-23"></div>
-                  <div class="tracker tr-24"></div>
-                  <div class="tracker tr-25"></div>
-                  <div id="card">
-                    <Image
-                      src={d.imageSrc}
-                      width={1000}
-                      height={230}
-                      alt={d.title}
-                      class="img"
-                    />
-                    <h1>{d.title}</h1>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
 
         <div className={styles.btnContainer}>
@@ -247,9 +173,9 @@ export default function Home() {
             width="500"
             height="300"
             style={{ border: 0, borderRadius: "20px" }}
-            allowfullscreen=""
+            allowFullScreen=""
             loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
+            referrerPolicy="no-referrer-when-downgrade"
             className={styles.locationMap}
           ></iframe>
         </div>

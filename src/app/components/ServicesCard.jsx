@@ -1,7 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../base/card.css";
-import Image from "next/image";
 import firstServiceImage from "../../../public/assets/firstServiceImage.jpg";
 import secondServiceImage from "../../../public/assets/secondServiceImage.jpg";
 import thirdServiceImage from "../../../public/assets/thirdServiceImage.jpg";
@@ -10,51 +9,17 @@ import fifthServiceImage from "../../../public/assets/fifthServiceImage.jpg";
 import sixthServiceImage from "../../../public/assets/sixthServiceImage.jpg";
 
 function ServicesCard() {
-  const [data, setData] = useState([
-    {
-      id: 1,
-      imageSrc: firstServiceImage,
-      title: "ساخت انواع کمد دیواری",
-      description:
-        "  طراحی و ساخت کمد دیواری | قیمت کمد دیواری در تهران و کرج ",
-    },
-    {
-      id: 2,
-      imageSrc: secondServiceImage,
-      title: "کابینت ممبران",
-      description:
-        "کابینت آشپزخانه ممبران یکی از لوکس ترین و جذاب ترین انواع کابینت آشپزخانه به حساب",
-    },
-    {
-      id: 3,
-      imageSrc: thirdServiceImage,
-      title: "طراحی و ساخت انواع درب",
-      description: "  طراحی و ساخت درب | قیمت درب در تهران و کرج",
-    },
-    {
-      id: 4,
-      imageSrc: forthServiceImage,
-      title: "ساخت آینه کنسول",
-      description: "طراحی و ساخت انواع آینه کنسول با بهترین کیفیت",
-    },
-    {
-      id: 5,
-      imageSrc: fifthServiceImage,
-      title: "ساخت و تولید انواع پله",
-      description: "طراحی و تولید انواع پله شیک",
-    },
-    {
-      id: 6,
-      imageSrc: sixthServiceImage,
-      title: "کابینت ام دی اف",
-      description:
-        "از جمله خدمات صنایع چوب مهرشاد در تهران و کرج ساخت انواع کابینت mdf است.از جمله موارد مهم",
-    },
-  ]);
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:1337/api/services?populate=*")
+      .then((res) => res.json())
+      .then((data) => setServices(data.data));
+  }, []);
 
   return (
     <div class="cardContainer">
-      {data.map((d) => {
+      {services.map((d) => {
         return (
           <div class="container" key={d.id}>
             <div class="canvas">
@@ -84,7 +49,13 @@ function ServicesCard() {
               <div class="tracker tr-24"></div>
               <div class="tracker tr-25"></div>
               <div id="card">
-                <Image alt={d.title} src={d.imageSrc} width={1000} height={230} class="img" />
+                <img
+                  alt={d.title}
+                  src={`http://localhost:1337${d.image.url}`}
+                  width={1000}
+                  height={230}
+                  class="img"
+                />
                 <h1>{d.title}</h1>
                 <p>{d.description}</p>
               </div>

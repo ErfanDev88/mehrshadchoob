@@ -18,6 +18,7 @@ export default function RootLayout({ children }) {
     <html lang="en" dir="rtl">
       <head>
         <meta name="robots" content="index, follow" />
+        <link rel="icon" href="./favicon.ico" sizes="any" />
       </head>
       <body>
         <WorkSamplesContext>
